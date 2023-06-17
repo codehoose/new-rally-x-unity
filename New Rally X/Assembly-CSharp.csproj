@@ -57,9 +57,12 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Assets\Script\Sidebar\SidebarText.cs" />
-    <Compile Include="Assets\Script\Sidebar\SidebarScore.cs" />
-    <Compile Include="Assets\Script\Sidebar\Sidebar.cs" />
     <Compile Include="Assets\Script\Debug\SidebarDebug.cs" />
+    <Compile Include="Assets\Script\Sidebar\Sidebar.cs" />
+    <Compile Include="Assets\Script\Sidebar\SidebarScore.cs" />
+    <Compile Include="Assets\Script\MapMaker\MapGenerator.cs" />
+    <Compile Include="Assets\Script\MapMaker\MapFile.cs" />
+    <Compile Include="Assets\Script\MapMaker\MapLayer.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="UnityEngine">

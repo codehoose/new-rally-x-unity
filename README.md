@@ -11,3 +11,7 @@ https://gamefaqs.gamespot.com/arcade/584185-rally-x/map/495-course-maps
 
 ## Sprites and Blocks
 https://www.spriters-resource.com/game_boy_advance/namco50/sheet/102976/
+
+
+# Helpful links
+- [XML Serialization in C#](https://stackoverflow.com/questions/3187444/convert-xml-string-to-object)
