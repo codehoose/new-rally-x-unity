@@ -439,6 +439,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _position: {x: 19, y: -53}
+  _tilemap: {fileID: 790964209}
 --- !u!1 &1917065583
 GameObject:
   m_ObjectHideFlags: 0
