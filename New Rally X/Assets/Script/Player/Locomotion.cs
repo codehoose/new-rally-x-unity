@@ -1,9 +1,12 @@
+using System;
 using System.Collections;
 using UnityEngine;
 using UnityEngine.Tilemaps;
 
 public class Locomotion : MonoBehaviour
 {
+    private static Vector2[] DIRECTIONS = new Vector2[] { Vector2.right, Vector2.down, Vector2.left, Vector2.up };
+
     private Vector2 _requestedDirection;
 
     private Vector2 _direction;
@@ -19,27 +22,35 @@ public class Locomotion : MonoBehaviour
     [SerializeField]
     private SpriteRenderer _sprite;
 
-    //private void OnDrawGizmos()
-    //{
-    //    Color current = Gizmos.color;
-    //    Gizmos.color = Color.red;
-    //    Vector3 testPos = _position.TestPosInDirection(_direction) * 8;
-    //    Gizmos.DrawLine(testPos, testPos + new Vector3(24, 0));
-    //    Gizmos.DrawLine(testPos, testPos + new Vector3(0, 24));
-    //    Gizmos.DrawLine(testPos + new Vector3(24, 0), testPos + new Vector3(24, 24));
-    //    Gizmos.DrawLine(testPos + new Vector3(0, 24), testPos + new Vector3(24, 24));
-    //    Gizmos.color = current;
-    //}
+    private void OnDrawGizmos()
+    {
+        Color current = Gizmos.color;
+        Gizmos.color = Color.red;
+        Vector3 pos = _position.SpriteToWorld();
+        Gizmos.DrawLine(pos, pos + new Vector3(24, 0));
+        Gizmos.DrawLine(pos, pos + new Vector3(0, -24));
+        Gizmos.DrawLine(pos + new Vector3(24, 0), pos + new Vector3(24, -24));
+        Gizmos.DrawLine(pos + new Vector3(0, -24), pos + new Vector3(24, -24));
+
+        Gizmos.color = Color.green;
+        pos = (_position + _direction).SpriteToWorld();
+        Gizmos.DrawLine(pos, pos + new Vector3(24, 0));
+        Gizmos.DrawLine(pos, pos + new Vector3(0, -24));
+        Gizmos.DrawLine(pos + new Vector3(24, 0), pos + new Vector3(24, -24));
+        Gizmos.DrawLine(pos + new Vector3(0, -24), pos + new Vector3(24, -24));
+
+        Gizmos.color = current;
+    }
 
     IEnumerator Start()
     {
         _direction = _requestedDirection = new Vector2(0, 1);
-        transform.position = _position.ToWorldGrid();
+        transform.position = _position.SpriteToBlock() * 8; // SpriteToWorld();
 
         while (true)
         {
             Vector3 start = transform.position;
-            Vector3 target = (_position + _direction).ToWorldGrid();
+            Vector3 target = (_position + _direction).SpriteToBlock() * 8;
             float time = 0;
             while (time < 1f)
             {
@@ -51,19 +62,19 @@ public class Locomotion : MonoBehaviour
 
                 if (Input.GetKey(KeyCode.UpArrow))
                 {
-                    _requestedDirection = new Vector2(0, 1);
+                    _requestedDirection = Vector2.up;
                 }
                 else if (Input.GetKey(KeyCode.DownArrow))
                 {
-                    _requestedDirection = new Vector2(0, -1);
+                    _requestedDirection = Vector2.down;
                 }
                 else if (Input.GetKey(KeyCode.LeftArrow))
                 {
-                    _requestedDirection = new Vector2(-1, 0);
+                    _requestedDirection = Vector2.left;
                 }
                 else if (Input.GetKey(KeyCode.RightArrow))
                 {
-                    _requestedDirection = new Vector2(1, 0);
+                    _requestedDirection = Vector2.right;
                 }
 
                 yield return null;
@@ -73,15 +84,15 @@ public class Locomotion : MonoBehaviour
             _position = _position + _direction;
 
             // Check blocks aren't in the way of the new direction
-            Vector2 blockPos = _position.TestPosInDirection(_requestedDirection);
+            Vector3Int[] positions = (_position + _requestedDirection).SpriteToBlock().GetTestPositions(_requestedDirection);
 
-            if (_tilemap.GetTile(new Vector3Int((int)blockPos.x, (int)blockPos.y, 0)) != null)
+            if (_tilemap.IsHit(positions))
             {
-                _direction = _requestedDirection * -1;
+                _direction = FindNextDirection(_direction);
             }
             else
             {
-                _direction = _requestedDirection;
+                _direction = FindNextDirection(_requestedDirection);
             }
 
             _sprite.flipY = _direction.y < 0;
@@ -91,7 +102,35 @@ public class Locomotion : MonoBehaviour
             else if (_direction.x > 0)
                 angle = -90;
 
-            transform.rotation = Quaternion.Euler(0, 0, angle);
+            _sprite.transform.rotation = Quaternion.Euler(0, 0, angle);
         }
+    }
+
+    private Vector2 FindNextDirection(Vector2 direction)
+    {
+        /*
+            DIRECTIONS:
+            +-------+-------+-------+-------+
+            |   0   |   1   |  2    |   3   |
+            +-------+-------+-------+-------+
+            | right | down  | left  |   up  |
+            +-------+-------+-------+-------+
+
+            Find 'dir' index the array e.g. if dir is 'left' then index is 2
+            This function will then check the following indices in order: 2, 3, 0, 1
+            because it wraps around the array using the % (mod) operator
+         */
+
+        int dirIndex = Array.IndexOf(DIRECTIONS, direction);
+        for (int i = 0; i < DIRECTIONS.Length; i++)
+        {
+            int actualIndex = (dirIndex + i) % DIRECTIONS.Length;
+            Vector2 dir = DIRECTIONS[actualIndex];
+            Vector3Int[] positions = (_position + dir).SpriteToBlock().GetTestPositions(dir);
+            if (!_tilemap.IsHit(positions))
+                return dir;
+        }
+
+        return direction;
     }
 }

@@ -62,10 +62,11 @@
     <Compile Include="Assets\Script\Debug\SidebarDebug.cs" />
     <Compile Include="Assets\Script\MapMaker\MapGenerator.cs" />
     <Compile Include="Assets\Script\MapMaker\MapFile.cs" />
+    <Compile Include="Assets\Script\Player\CameraFollow.cs" />
     <Compile Include="Assets\Script\Sidebar\Sidebar.cs" />
     <Compile Include="Assets\Script\Sidebar\SidebarScore.cs" />
     <Compile Include="Assets\Script\MapMaker\MapPosition.cs" />
-    <Compile Include="Assets\Script\Player\CameraFollow.cs" />
+    <Compile Include="Assets\Script\MapMaker\TileMapHelpers.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="UnityEngine">
