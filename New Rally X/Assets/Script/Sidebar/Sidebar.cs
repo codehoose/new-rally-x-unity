@@ -1,8 +1,12 @@
+using System.Collections;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class Sidebar : MonoBehaviour
 {
     private const int MAX_LIVES = 3;
+
+    private RadarBlob _playerDot;
 
     public SidebarText currentPlayer;
 
@@ -15,6 +19,26 @@ public class Sidebar : MonoBehaviour
     public GameObject[] livesIndicator;
 
     public GameObject fuelIndicator;
+
+    [SerializeField]
+    private GameObject _radar;
+
+    [SerializeField]
+    private RadarBlob _playerRadarPrefab;
+
+    [SerializeField]
+    private Locomotion _playerPosition;
+
+    IEnumerator Start()
+    {
+        _playerDot = Instantiate(_playerRadarPrefab, _radar.transform);
+
+        while (true)
+        {
+            _playerDot.transform.localPosition = new Vector3(2f * (_playerPosition.GridPosition.x - 4), 2f * (_playerPosition.GridPosition.y + 4), 0);
+            yield return null;
+        }
+    }
 
     public int Lives
     {

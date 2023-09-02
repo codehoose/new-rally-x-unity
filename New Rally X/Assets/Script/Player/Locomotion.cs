@@ -22,6 +22,8 @@ public class Locomotion : MonoBehaviour
     [SerializeField]
     private SpriteRenderer _sprite;
 
+    public Vector2 GridPosition => _position;
+
     private void OnDrawGizmos()
     {
         Color current = Gizmos.color;

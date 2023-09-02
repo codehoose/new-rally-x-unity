@@ -607,6 +607,11 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 261362427}
   m_CullTransparentMesh: 1
+--- !u!1 &343675254 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 3850862604598943743, guid: 6fab78e8bcfb2234e950e292436ba4af, type: 3}
+  m_PrefabInstance: {fileID: 3850862604969130598}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &350381822
 GameObject:
   m_ObjectHideFlags: 0
@@ -2777,6 +2782,14 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 3850862603703715616, guid: 6fab78e8bcfb2234e950e292436ba4af, type: 3}
+      propertyPath: _radar
+      value: 
+      objectReference: {fileID: 343675254}
+    - target: {fileID: 3850862603703715616, guid: 6fab78e8bcfb2234e950e292436ba4af, type: 3}
+      propertyPath: _playerRadarPrefab
+      value: 
+      objectReference: {fileID: 7534131870049615005, guid: 9652f1248cc52af489b87ac569c0db2c, type: 3}
     - target: {fileID: 3850862603703715619, guid: 6fab78e8bcfb2234e950e292436ba4af, type: 3}
       propertyPath: m_RootOrder
       value: 1
@@ -2824,6 +2837,18 @@ PrefabInstance:
     - target: {fileID: 3850862603703715621, guid: 6fab78e8bcfb2234e950e292436ba4af, type: 3}
       propertyPath: m_Name
       value: Sidebar
+      objectReference: {fileID: 0}
+    - target: {fileID: 3850862603724538496, guid: 6fab78e8bcfb2234e950e292436ba4af, type: 3}
+      propertyPath: m_SortingOrder
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 3850862604656733258, guid: 6fab78e8bcfb2234e950e292436ba4af, type: 3}
+      propertyPath: m_SortingOrder
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 3850862604973692872, guid: 6fab78e8bcfb2234e950e292436ba4af, type: 3}
+      propertyPath: m_SortingOrder
+      value: 5
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 6fab78e8bcfb2234e950e292436ba4af, type: 3}
