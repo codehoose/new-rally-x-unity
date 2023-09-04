@@ -1,5 +1,4 @@
 using System.Collections;
-using Unity.VisualScripting;
 using UnityEngine;
 
 public class Sidebar : MonoBehaviour
@@ -27,11 +26,26 @@ public class Sidebar : MonoBehaviour
     private RadarBlob _playerRadarPrefab;
 
     [SerializeField]
+    private RadarBlob _flagPrefab;
+
+    [SerializeField]
     private Locomotion _playerPosition;
+
+    [SerializeField]
+    private MapGenerator _mapGenerator;
 
     IEnumerator Start()
     {
+        while (!_mapGenerator.IsReady) yield return null;
+
         _playerDot = Instantiate(_playerRadarPrefab, _radar.transform);
+
+        foreach (var pos in _mapGenerator.Flags)
+        {
+            _flagPrefab = Instantiate(_playerRadarPrefab, _radar.transform);
+            _flagPrefab.transform.localPosition = pos * 2f;
+            _flagPrefab.SetColors(Color.yellow);
+        }
 
         while (true)
         {
