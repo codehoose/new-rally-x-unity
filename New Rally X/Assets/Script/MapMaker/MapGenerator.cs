@@ -32,11 +32,14 @@ public class MapGenerator : MonoBehaviour
     void Awake()
     {
         _flags = new List<Vector2>();
+        UnityEngine.Random.InitState((int)System.DateTime.Now.Millisecond * 1000);
 
         MapFile mapFile = JsonUtility.FromJson<MapFile>(_jsonMap.text);
         MapLayer blocks = mapFile.layers.FirstOrDefault(layer => layer.name == "Blocks");
         MapLayer flags = mapFile.layers.FirstOrDefault(layer => layer.name == "Flags");
         flags.objects.Select(o => new Vector2(Mathf.FloorToInt(o.x / 24), Mathf.FloorToInt(-o.y / 24)))
+                     .OrderBy(v => UnityEngine.Random.Range(0, 100))
+                     .Take(10)
                      .ForEach(pos =>
                      {
                          _flags.Add(pos - new Vector2(4, -4));

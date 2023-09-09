@@ -56,6 +56,7 @@
     <Analyzer Include="C:\Program Files\Microsoft Visual Studio\2022\Community\Common7\IDE\Extensions\Microsoft\Visual Studio Tools for Unity\Analyzers\Microsoft.Unity.Analyzers.dll" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Assets\Script\MapMaker\MapObject.cs" />
     <Compile Include="Assets\Script\Sidebar\SidebarText.cs" />
     <Compile Include="Assets\Script\Player\Locomotion.cs" />
     <Compile Include="Assets\Script\MapMaker\MapLayer.cs" />
@@ -66,10 +67,9 @@
     <Compile Include="Assets\Script\Player\CameraFollow.cs" />
     <Compile Include="Assets\Script\Sidebar\Sidebar.cs" />
     <Compile Include="Assets\Script\Sidebar\SidebarScore.cs" />
+    <Compile Include="Assets\Script\General\LinqExtensions.cs" />
     <Compile Include="Assets\Script\Radar\RadarBlob.cs" />
     <Compile Include="Assets\Script\MapMaker\MapPosition.cs" />
-    <Compile Include="Assets\Script\MapMaker\MapObject.cs" />
-    <Compile Include="Assets\Script\General\LinqExtensions.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="UnityEngine">
