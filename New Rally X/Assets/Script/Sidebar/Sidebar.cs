@@ -1,4 +1,5 @@
 using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 
 public class Sidebar : MonoBehaviour
@@ -19,14 +20,13 @@ public class Sidebar : MonoBehaviour
 
     public GameObject fuelIndicator;
 
+    private Dictionary<GameObject, GameObject> _flagActualToRadar;
+
     [SerializeField]
     private GameObject _radar;
 
     [SerializeField]
     private RadarBlob _playerRadarPrefab;
-
-    [SerializeField]
-    private RadarBlob _flagPrefab;
 
     [SerializeField]
     private Locomotion _playerPosition;
@@ -39,12 +39,21 @@ public class Sidebar : MonoBehaviour
         while (!_mapGenerator.IsReady) yield return null;
 
         _playerDot = Instantiate(_playerRadarPrefab, _radar.transform);
+        _flagActualToRadar = new Dictionary<GameObject, GameObject>();
 
-        foreach (var pos in _mapGenerator.Flags)
+        foreach (var flag in _mapGenerator.Flags)
         {
-            _flagPrefab = Instantiate(_playerRadarPrefab, _radar.transform);
-            _flagPrefab.transform.localPosition = pos * 2f;
-            _flagPrefab.SetColors(Color.yellow);
+            RadarBlob radarBlob = Instantiate(_playerRadarPrefab, _radar.transform);
+            radarBlob.transform.localPosition = flag.Position * 2f;
+            _flagActualToRadar.Add(flag.RealFlag, radarBlob.gameObject);
+            if (flag.FlagType == FlagType.Special)
+            {
+                radarBlob.SetColors(Color.yellow, Color.red);
+            }
+            else
+            {
+                radarBlob.SetColors(Color.yellow);
+            }
         }
 
         while (true)
@@ -52,6 +61,11 @@ public class Sidebar : MonoBehaviour
             _playerDot.transform.localPosition = new Vector3(2f * (_playerPosition.GridPosition.x - 4), 2f * (_playerPosition.GridPosition.y + 4), 0);
             yield return null;
         }
+    }
+
+    public void RemoveFlag(GameObject flag)
+    {
+        Destroy(_flagActualToRadar[flag]);
     }
 
     public int Lives

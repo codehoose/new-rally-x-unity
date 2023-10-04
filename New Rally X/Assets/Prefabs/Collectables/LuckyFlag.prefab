@@ -10,11 +10,11 @@ GameObject:
   m_Component:
   - component: {fileID: 5866925613599286560}
   - component: {fileID: 541601026710054420}
-  - component: {fileID: -7086544504067048283}
-  - component: {fileID: 4335649242053976831}
-  - component: {fileID: -5716340402447037604}
+  - component: {fileID: 7078932129548046176}
+  - component: {fileID: -1033355396614270606}
+  - component: {fileID: -6061841055162220260}
   m_Layer: 0
-  m_Name: SpecialFlag
+  m_Name: LuckyFlag
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -76,7 +76,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 1308909435, guid: 52d96e73198aea145bde0dc792751b8a, type: 3}
+  m_Sprite: {fileID: 1454945226, guid: 52d96e73198aea145bde0dc792751b8a, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -87,7 +87,7 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!50 &-7086544504067048283
+--- !u!50 &7078932129548046176
 Rigidbody2D:
   serializedVersion: 4
   m_ObjectHideFlags: 0
@@ -108,7 +108,7 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 7
---- !u!61 &4335649242053976831
+--- !u!61 &-1033355396614270606
 BoxCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -134,7 +134,7 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 16, y: 16}
   m_EdgeRadius: 0
---- !u!114 &-5716340402447037604
+--- !u!114 &-6061841055162220260
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -146,4 +146,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8069b9d9af5b74e4694488bc272ec25b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _flagType: Special
+  _flagType: Lucky

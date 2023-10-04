@@ -13,6 +13,8 @@ public class Locomotion : MonoBehaviour
 
     private float _speed = 1f;
 
+    private bool _paused;
+
     [SerializeField]
     private Vector2 _position;
 
@@ -44,6 +46,10 @@ public class Locomotion : MonoBehaviour
         Gizmos.color = current;
     }
 
+    public void Pause() => _paused = true;
+
+    public void Resume() => _paused = false;
+
     IEnumerator Start()
     {
         _direction = _requestedDirection = new Vector2(0, 1);
@@ -54,7 +60,7 @@ public class Locomotion : MonoBehaviour
             Vector3 start = transform.position;
             Vector3 target = (_position + _direction).SpriteToBlock() * 8;
             float time = 0;
-            while (time < 1f)
+            while (time < 1f && !_paused)
             {
                 transform.position = Vector3.Lerp(start, target, time);
                 time += Time.deltaTime / _speed;
@@ -82,29 +88,36 @@ public class Locomotion : MonoBehaviour
                 yield return null;
             }
 
-            transform.position = target;
-            _position = _position + _direction;
-
-            // Check blocks aren't in the way of the new direction
-            Vector3Int[] positions = (_position + _requestedDirection).SpriteToBlock().GetTestPositions(_requestedDirection);
-
-            if (_tilemap.IsHit(positions))
+            if (!_paused)
             {
-                _direction = FindNextDirection(_direction);
+                transform.position = target;
+                _position = _position + _direction;
+
+                // Check blocks aren't in the way of the new direction
+                Vector3Int[] positions = (_position + _requestedDirection).SpriteToBlock().GetTestPositions(_requestedDirection);
+
+                if (_tilemap.IsHit(positions))
+                {
+                    _direction = FindNextDirection(_direction);
+                }
+                else
+                {
+                    _direction = FindNextDirection(_requestedDirection);
+                }
+
+                _sprite.flipY = _direction.y < 0;
+                float angle = 0;
+                if (_direction.x < 0)
+                    angle = 90;
+                else if (_direction.x > 0)
+                    angle = -90;
+
+                _sprite.transform.rotation = Quaternion.Euler(0, 0, angle);
             }
             else
             {
-                _direction = FindNextDirection(_requestedDirection);
+                yield return null;
             }
-
-            _sprite.flipY = _direction.y < 0;
-            float angle = 0;
-            if (_direction.x < 0)
-                angle = 90;
-            else if (_direction.x > 0)
-                angle = -90;
-
-            _sprite.transform.rotation = Quaternion.Euler(0, 0, angle);
         }
     }
 

@@ -486,6 +486,17 @@ Tilemap:
     e31: 0
     e32: 0
     e33: 1
+--- !u!114 &1472649543 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 3850862603703715616, guid: 6fab78e8bcfb2234e950e292436ba4af, type: 3}
+  m_PrefabInstance: {fileID: 1663881021}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e96d74b3e1193de4c84bea7088dff13f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1493108834
 GameObject:
   m_ObjectHideFlags: 0
@@ -731,6 +742,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Sidebar
       objectReference: {fileID: 0}
+    - target: {fileID: 3850862604330490704, guid: 6fab78e8bcfb2234e950e292436ba4af, type: 3}
+      propertyPath: m_SortingOrder
+      value: 6
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 6fab78e8bcfb2234e950e292436ba4af, type: 3}
 --- !u!1 &1793504505
@@ -743,6 +758,8 @@ GameObject:
   m_Component:
   - component: {fileID: 1793504507}
   - component: {fileID: 1793504508}
+  - component: {fileID: 1793504509}
+  - component: {fileID: 1793504510}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -782,6 +799,46 @@ MonoBehaviour:
   _position: {x: 19, y: -54}
   _tilemap: {fileID: 790964209}
   _sprite: {fileID: 1649927488}
+--- !u!114 &1793504509
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1793504505}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e2188b9ec19b2834eb734f0fdd2cb51b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _sidebar: {fileID: 1472649543}
+  _locomotion: {fileID: 1793504508}
+--- !u!61 &1793504510
+BoxCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1793504505}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 12, y: -12}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0, y: 0}
+    oldSize: {x: 0, y: 0}
+    newSize: {x: 0, y: 0}
+    adaptiveTilingThreshold: 0
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  serializedVersion: 2
+  m_Size: {x: 16, y: 16}
+  m_EdgeRadius: 0
 --- !u!1 &1917065583
 GameObject:
   m_ObjectHideFlags: 0
@@ -1051,6 +1108,7 @@ MonoBehaviour:
   - {fileID: 1415390954, guid: 8c5a9bd1c9e04ee469b389b39d35bd91, type: 3}
   _tile: {fileID: 11400000, guid: c646141e2c3b5ca43b7c56c1c91bcd4e, type: 2}
   _flagPrefab: {fileID: 5561401338251920409, guid: 09de2953725459647a472c89f2b51d19, type: 3}
+  _luckyFlagPrefab: {fileID: 3272170942017994520, guid: f75b08d8959d41d4894227896ea30e6e, type: 3}
   _specialFlagPrefab: {fileID: 3272170942017994520, guid: 73f265d1857c4234abe5cbd0ed91e8bd, type: 3}
 --- !u!156049354 &1917065585
 Grid:

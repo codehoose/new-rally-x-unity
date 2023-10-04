@@ -59,6 +59,7 @@
     <Compile Include="Assets\Script\MapMaker\MapObject.cs" />
     <Compile Include="Assets\Script\Sidebar\SidebarText.cs" />
     <Compile Include="Assets\Script\Player\Locomotion.cs" />
+    <Compile Include="Assets\Script\Player\CarFuelGauge.cs" />
     <Compile Include="Assets\Script\MapMaker\MapLayer.cs" />
     <Compile Include="Assets\Script\Debug\SidebarDebug.cs" />
     <Compile Include="Assets\Script\MapMaker\MapGenerator.cs" />
@@ -69,6 +70,9 @@
     <Compile Include="Assets\Script\Sidebar\SidebarScore.cs" />
     <Compile Include="Assets\Script\General\LinqExtensions.cs" />
     <Compile Include="Assets\Script\Radar\RadarBlob.cs" />
+    <Compile Include="Assets\Script\MapMaker\FlagMapBlob.cs" />
+    <Compile Include="Assets\Script\Level\CollectibleFlag.cs" />
+    <Compile Include="Assets\Script\MapMaker\FlagType.cs" />
     <Compile Include="Assets\Script\MapMaker\MapPosition.cs" />
   </ItemGroup>
   <ItemGroup>
