@@ -32,7 +32,7 @@ public static class MapPosition
         return new Vector3Int((int)vector.x, (int)vector.y, 0);
     }
 
-    private static Vector3Int[] GetHorizontal(Vector2 blockPosition)
+    public static Vector3Int[] GetHorizontal(Vector2 blockPosition)
     {
         Vector3Int[] positions = new Vector3Int[3];
         for(int i =0; i < 3; i++)
@@ -43,7 +43,7 @@ public static class MapPosition
         return positions;
     }
 
-    private static Vector3Int[] GetVertical(Vector2 blockPosition)
+    public static Vector3Int[] GetVertical(Vector2 blockPosition)
     {
         Vector3Int[] positions = new Vector3Int[3];
         for (int i = 0; i < 3; i++)

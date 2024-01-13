@@ -74,6 +74,10 @@
     <Compile Include="Assets\Script\Level\CollectibleFlag.cs" />
     <Compile Include="Assets\Script\MapMaker\FlagType.cs" />
     <Compile Include="Assets\Script\MapMaker\MapPosition.cs" />
+    <Compile Include="Assets\Script\Enemy\EnemyLocomotion.cs" />
+    <Compile Include="Assets\Script\Enemy\GameController.cs" />
+    <Compile Include="Assets\Script\Enemy\EnemyBrain.cs" />
+    <Compile Include="Assets\Script\Enemy\EnemyBrainType.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="UnityEngine">

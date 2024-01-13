@@ -8,6 +8,8 @@ public class Sidebar : MonoBehaviour
 
     private RadarBlob _playerDot;
 
+    private RadarBlob[] _enemyDots;
+
     public SidebarText currentPlayer;
 
     public SidebarText currentRound;
@@ -34,12 +36,22 @@ public class Sidebar : MonoBehaviour
     [SerializeField]
     private MapGenerator _mapGenerator;
 
+    [SerializeField]
+    private GameController _gameController;
+
     IEnumerator Start()
     {
         while (!_mapGenerator.IsReady) yield return null;
 
         _playerDot = Instantiate(_playerRadarPrefab, _radar.transform);
         _flagActualToRadar = new Dictionary<GameObject, GameObject>();
+
+        _enemyDots = new RadarBlob[_gameController.Enemies.Length];
+        for (int i = 0; i < _gameController.Enemies.Length; i++)
+        {
+            _enemyDots[i] = Instantiate(_playerRadarPrefab, _radar.transform);
+            _enemyDots[i].SetColors(new Color(0.6f, 0, 0));
+        }
 
         foreach (var flag in _mapGenerator.Flags)
         {
@@ -59,6 +71,13 @@ public class Sidebar : MonoBehaviour
         while (true)
         {
             _playerDot.transform.localPosition = new Vector3(2f * (_playerPosition.GridPosition.x - 4), 2f * (_playerPosition.GridPosition.y + 4), 0);
+
+            for (int i = 0; i < _gameController.Enemies.Length; i++)
+            {
+                EnemyLocomotion enemy = _gameController.Enemies[i];
+                _enemyDots[i].transform.localPosition = new Vector3(2f * (enemy.GridPosition.x - 4), 2f * (enemy.GridPosition.y + 4), 0);
+            }
+
             yield return null;
         }
     }
