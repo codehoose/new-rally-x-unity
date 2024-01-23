@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using UnityEngine;
 
@@ -20,6 +21,8 @@ public class CarFuelGauge : MonoBehaviour
 
     [SerializeField]
     private Locomotion _locomotion;
+
+    public event EventHandler HitEnemy;
 
     // Start is called before the first frame update
     IEnumerator Start()
@@ -87,16 +90,23 @@ public class CarFuelGauge : MonoBehaviour
     private void OnTriggerEnter2D(Collider2D collision)
     {
         CollectibleFlag flag = collision.GetComponent<CollectibleFlag>();
-        if (flag == null) return;
+        if (flag != null)
+        {
+            if (flag.FlagType == "Flag")
+                PickUpFlag();
+            else if (flag.FlagType == "Special")
+                PickUpSpecialFlag();
+            else if (flag.FlagType == "Lucky")
+                PickUpLuckyFlag();
 
-        if (flag.FlagType == "Flag")
-            PickUpFlag();
-        else if (flag.FlagType == "Special")
-            PickUpSpecialFlag();
-        else if (flag.FlagType == "Lucky")
-            PickUpLuckyFlag();
-
-        _sidebar.RemoveFlag(flag.gameObject);
-        Destroy(flag.gameObject);
+            _sidebar.RemoveFlag(flag.gameObject);
+            Destroy(flag.gameObject);
+        }
+        else if(collision.tag == "Enemy")
+        {
+            EnemyLocomotion loco = collision.GetComponent<EnemyLocomotion>();
+            if (loco.IsPaused) return;
+            HitEnemy?.Invoke(this, EventArgs.Empty);
+        }
     }
 }

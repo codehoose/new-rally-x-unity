@@ -179,9 +179,10 @@ GameObject:
   - component: {fileID: 6826702724922750645}
   - component: {fileID: 6826702724922750640}
   - component: {fileID: 7615571142042257307}
+  - component: {fileID: 8707161709411806871}
   m_Layer: 0
   m_Name: EnemyCar
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -213,7 +214,7 @@ BoxCollider2D:
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 12, y: -12}
@@ -244,3 +245,25 @@ MonoBehaviour:
   _position: {x: 19, y: 19}
   _tilemap: {fileID: 0}
   _sprite: {fileID: 6826702724793853710}
+  _player: {fileID: 0}
+--- !u!50 &8707161709411806871
+Rigidbody2D:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6826702724922750647}
+  m_BodyType: 1
+  m_Simulated: 1
+  m_UseFullKinematicContacts: 0
+  m_UseAutoMass: 0
+  m_Mass: 1
+  m_LinearDrag: 0
+  m_AngularDrag: 0.05
+  m_GravityScale: 1
+  m_Material: {fileID: 0}
+  m_Interpolate: 0
+  m_SleepingMode: 1
+  m_CollisionDetection: 0
+  m_Constraints: 7

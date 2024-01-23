@@ -56,11 +56,15 @@
     <Analyzer Include="C:\Program Files\Microsoft Visual Studio\2022\Community\Common7\IDE\Extensions\Microsoft\Visual Studio Tools for Unity\Analyzers\Microsoft.Unity.Analyzers.dll" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Assets\Script\Enemy\GameController.cs" />
+    <Compile Include="Assets\Script\Enemy\EnemyBrainType.cs" />
     <Compile Include="Assets\Script\MapMaker\MapObject.cs" />
     <Compile Include="Assets\Script\Sidebar\SidebarText.cs" />
+    <Compile Include="Assets\Script\Enemy\EnemyBrain.cs" />
     <Compile Include="Assets\Script\Player\Locomotion.cs" />
     <Compile Include="Assets\Script\Player\CarFuelGauge.cs" />
     <Compile Include="Assets\Script\MapMaker\MapLayer.cs" />
+    <Compile Include="Assets\Script\Enemy\EnemyLocomotion.cs" />
     <Compile Include="Assets\Script\Debug\SidebarDebug.cs" />
     <Compile Include="Assets\Script\MapMaker\MapGenerator.cs" />
     <Compile Include="Assets\Script\MapMaker\TileMapHelpers.cs" />
@@ -74,10 +78,6 @@
     <Compile Include="Assets\Script\Level\CollectibleFlag.cs" />
     <Compile Include="Assets\Script\MapMaker\FlagType.cs" />
     <Compile Include="Assets\Script\MapMaker\MapPosition.cs" />
-    <Compile Include="Assets\Script\Enemy\EnemyLocomotion.cs" />
-    <Compile Include="Assets\Script\Enemy\GameController.cs" />
-    <Compile Include="Assets\Script\Enemy\EnemyBrain.cs" />
-    <Compile Include="Assets\Script\Enemy\EnemyBrainType.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="UnityEngine">

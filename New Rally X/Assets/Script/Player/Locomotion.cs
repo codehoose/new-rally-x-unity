@@ -15,6 +15,10 @@ public class Locomotion : MonoBehaviour
 
     private bool _paused;
 
+    private Vector2 _initialPositionGrid;
+    private Vector3 _initialPositionWorld;
+
+
     [SerializeField]
     private Vector2 _position;
 
@@ -23,6 +27,9 @@ public class Locomotion : MonoBehaviour
 
     [SerializeField]
     private SpriteRenderer _sprite;
+
+    [SerializeField]
+    private GameObject _bang;
 
     public Vector2 GridPosition => _position;
 
@@ -50,11 +57,31 @@ public class Locomotion : MonoBehaviour
 
     public void Resume() => _paused = false;
 
+    public void Crash()
+    {
+        _bang.SetActive(true);
+        _paused = true;
+    }
+
+    public void Restart()
+    {
+        _bang.SetActive(false);
+        _paused = false;
+        transform.position = _initialPositionWorld;
+        _position = _initialPositionGrid;
+        _sprite.transform.rotation = Quaternion.identity;
+        _sprite.flipX = false;
+        _sprite.flipY = false;
+        _direction = _requestedDirection = new Vector2(0, 1);
+    }
+
     IEnumerator Start()
     {
         _paused = true;
         _direction = _requestedDirection = new Vector2(0, 1);
         transform.position = _position.SpriteToBlock() * 8; // SpriteToWorld();
+        _initialPositionGrid = _position;
+        _initialPositionWorld = transform.position;
 
         while (true)
         {

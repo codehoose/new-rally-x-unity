@@ -13,6 +13,8 @@ public class EnemyLocomotion : MonoBehaviour
 
     private bool _paused;
 
+    public bool IsPaused => _paused;
+
     // The brains of the enemy car
     private Func<Vector2, Tilemap, Vector2, Vector2> FindNextDirection;
 
@@ -27,6 +29,8 @@ public class EnemyLocomotion : MonoBehaviour
 
     [SerializeField]
     private Locomotion _player;
+    private Vector3 _initialPositionWorld;
+    private Vector2 _initialPositionGrid;
 
     public Vector2 GridPosition => _position;
 
@@ -60,6 +64,26 @@ public class EnemyLocomotion : MonoBehaviour
         _paused = true;
         _direction = _requestedDirection = new Vector2(0, 1);
         transform.position = _position.SpriteToBlock() * 8; // SpriteToWorld();
+        _initialPositionGrid = _position;
+        _initialPositionWorld = transform.position;
+    }
+
+    public void Crash()
+    {
+        _paused = true;
+        _sprite.gameObject.SetActive(false);
+    }
+
+    public void Restart()
+    {
+        _paused = false;
+        _sprite.gameObject.SetActive(true);
+        transform.position = _initialPositionWorld;
+        _position = _initialPositionGrid;
+        _sprite.transform.rotation = Quaternion.identity;
+        _sprite.flipX = false;
+        _sprite.flipY = false;
+        _direction = _requestedDirection = new Vector2(0, 1);
     }
 
     public void StartTheEngine()

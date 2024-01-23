@@ -443,6 +443,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _player: {fileID: 1793504508}
+  _cameraFollow: {fileID: 1493108838}
   _enemies:
   - {fileID: 354331351}
   _gameDelay: 1
