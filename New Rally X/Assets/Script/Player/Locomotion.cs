@@ -6,18 +6,14 @@ using UnityEngine.Tilemaps;
 public class Locomotion : MonoBehaviour
 {
     private static Vector2[] DIRECTIONS = new Vector2[] { Vector2.right, Vector2.down, Vector2.left, Vector2.up };
-
     private Vector2 _requestedDirection;
-
     private Vector2 _direction;
-
     private float _speed = 1f;
-
     private bool _paused;
+    private bool _thrust;
 
     private Vector2 _initialPositionGrid;
     private Vector3 _initialPositionWorld;
-
 
     [SerializeField]
     private Vector2 _position;
@@ -32,6 +28,10 @@ public class Locomotion : MonoBehaviour
     private GameObject _bang;
 
     public Vector2 GridPosition => _position;
+
+    public bool Slowdown { get; set; }
+
+    public bool Thrust => _thrust;
 
     private void OnDrawGizmos()
     {
@@ -94,7 +94,12 @@ public class Locomotion : MonoBehaviour
                 time += Time.deltaTime / _speed;
 
                 _requestedDirection = _direction;
-                _speed = Input.GetKey(KeyCode.LeftShift) || Input.GetKey(KeyCode.RightShift) ? 0.25f : 0.5f;
+                _thrust = Input.GetKey(KeyCode.LeftShift) || Input.GetKey(KeyCode.RightShift);
+                _speed = _thrust ? 0.25f : 0.5f;
+                if (Slowdown)
+                {
+                    _speed = 1;
+                }
 
                 if (Input.GetKey(KeyCode.UpArrow))
                 {
