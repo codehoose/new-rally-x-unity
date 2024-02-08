@@ -63,6 +63,7 @@ public class GameController : MonoBehaviour
         PlayerPrefs.SetInt("score", gauge.Score);
         PlayerPrefs.SetInt("lives", gauge.Lives);
         PlayerPrefs.SetInt("round", gauge.Round);
+        PlayerPrefs.SetInt("highscore", gauge.HighScore);
     }
 
     private void LoadPlayerData()
@@ -70,7 +71,8 @@ public class GameController : MonoBehaviour
         CarFuelGauge gauge = _player.GetComponent<CarFuelGauge>();
         gauge.Init(PlayerPrefs.GetInt("score", 0),
                    PlayerPrefs.GetInt("lives", 3),
-                   PlayerPrefs.GetInt("round", 1));
+                   PlayerPrefs.GetInt("round", 1),
+                   PlayerPrefs.GetInt("highscore", 1000));
     }
 
     private void Player_ResumeEnemies(object sender, EventArgs e)

@@ -13,6 +13,7 @@ public class CarFuelGauge : MonoBehaviour
     private int _fuel = 63;
     private int _currentPlayer = 1;
     private int _score = 0;
+    private int _highScore = 0;
     private int _currentRound = 1;
     private int _lives = 3;
 
@@ -27,6 +28,8 @@ public class CarFuelGauge : MonoBehaviour
     public int Lives => _lives;
 
     public int Round => _currentRound;
+
+    public int HighScore => _highScore;
 
     public event EventHandler HitEnemy;
 
@@ -45,25 +48,23 @@ public class CarFuelGauge : MonoBehaviour
         StartCoroutine(GatherFuel(false));
     }
 
-    public void Init(int score, int lives, int round)
+    public void Init(int score, int lives, int round, int highScore)
     {
         _score = score;
         _lives = lives;
         _currentRound = round;
+        _highScore = highScore;
 
         _sidebar.Score = _score;
         _sidebar.Lives = _lives;
+        _sidebar.CurrentPlayer = _currentPlayer;
         _sidebar.CurrentRound = _currentRound;
+        _sidebar.HiScore = _highScore;
     }
 
     // Start is called before the first frame update
     IEnumerator Start()
     {
-        _sidebar.Score = _score;
-        _sidebar.Lives = _lives;
-        _sidebar.CurrentPlayer = _currentPlayer;
-        _sidebar.CurrentRound = _currentRound;
-
         while (true)
         {
             if (!_paused)
@@ -73,7 +74,6 @@ public class CarFuelGauge : MonoBehaviour
                 float time = 0f;
                 while (time < 1f)
                 {
-                    //float thrustTime = _locomotion.Thrust ? 0.5f : 1;
                     float thrustTime = _locomotion.Thrust ? 1 : 2;
                     time += Time.deltaTime / thrustTime;
                     yield return null;
@@ -92,8 +92,8 @@ public class CarFuelGauge : MonoBehaviour
     private void PickUpFlag(bool luckyFlag = false)
     {
         _flagsCollected++;
-        _score += _currentPointsPerFlag * _flagsCollected;
-        _sidebar.Score = _score;
+        IncrementScore(_currentPointsPerFlag * _flagsCollected);
+
         if (!luckyFlag && _flagsCollected == 10)
         {
             AllFlagsCollected?.Invoke(this, EventArgs.Empty);
@@ -104,8 +104,7 @@ public class CarFuelGauge : MonoBehaviour
     {
         _flagsCollected++;
         _currentPointsPerFlag = POINTS_PER_FLAG_BONUS;
-        _score += _currentPointsPerFlag * _flagsCollected;
-        _sidebar.Score = _score;
+        IncrementScore(_currentPointsPerFlag * _flagsCollected);
     }
 
     private void PickUpLuckyFlag()
@@ -113,6 +112,18 @@ public class CarFuelGauge : MonoBehaviour
         PauseEnemies?.Invoke(this, EventArgs.Empty);
         PickUpFlag(true);
         StartCoroutine(GatherFuel());
+    }
+
+    private void IncrementScore(int delta)
+    {
+        _score += delta;
+        if (_score > _highScore)
+        {
+            _highScore = _score;
+        }
+
+        _sidebar.Score = _score;
+        _sidebar.HiScore = _highScore;
     }
 
     private IEnumerator GatherFuel(bool resumeGameplay = true)
@@ -124,8 +135,7 @@ public class CarFuelGauge : MonoBehaviour
         while (currentFuel > 0)
         {
             currentFuel--;
-            _score += 10;
-            _sidebar.Score = _score;
+            IncrementScore(10);
             _sidebar.Fuel = currentFuel;
             yield return new WaitForSeconds(0.125f);
         }
